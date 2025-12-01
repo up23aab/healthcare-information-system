@@ -1,0 +1,98 @@
+================================================================================
+REFLECTIVE REPORT
+Healthcare Management System Implementation
+
+Student: Utsav Prajapati
+Module: Software Architecture - Part 2
+Word Count: 471 words
+================================================================================
+
+INTRODUCTION
+
+This report examines how the Part 1 design specifications have been implemented
+in the Healthcare Management System, emphasizing the Model-View-Controller (MVC)
+architectural pattern and modern Java design patterns employed in development.
+
+TRANSLATION OF PART 1 DESIGNS TO IMPLEMENTATION
+
+The Part 1 class diagram established the foundational object model for all
+domain entities. PatientModel serves as the primary entity, maintaining patient
+demographics and medical information as specified in the design. The model uses
+HashMap collections for efficient appointment management, representing the
+aggregation relationship between Patient and Appointment entities identified in
+Part 1. This data structure choice provides O(1) lookup performance for
+appointment retrieval by identifier.
+
+The use case diagram from Part 1 directly influenced method implementation
+throughout the system. The "schedule appointment" use case translates to the
+registerAppointment() method in PatientModel, while prescription creation
+workflows manifest in the createPrescription() methods within DataController.
+The referral generation process, central to Part 1's design, drives the entire
+ReferralController singleton implementation strategy.
+
+Inheritance relationships specified in Part 1 informed the model architecture,
+though the implementation focuses on concrete models for core functionality.
+This pragmatic approach maintains alignment with design principles while
+prioritizing deliverable features for the assignment scope.
+
+MODEL-VIEW-CONTROLLER ARCHITECTURE IMPLEMENTATION
+
+The system implements MVC through distinct layered packages, ensuring clear
+separation of concerns and maintainability.
+
+The MODEL layer comprises all classes in the models package. PatientModel,
+AppointmentModel, PrescriptionModel, and ReferralModel encapsulate business
+data with comprehensive getter/setter methods. Models employ Java 8 features
+including lambda expressions and functional interfaces where appropriate. Each
+model includes toCSVFormat() methods for serialization, keeping data
+representation logic within the model layer. HashMap-based collections provide
+efficient data access and management.
+
+The VIEW layer contains all user interface components in the views package.
+MainApplicationWindow provides the primary interface with tabbed navigation
+using JTabbedPane for logical data type separation. Dialog classes
+(PatientDialog, AppointmentDialog, PrescriptionDialog, ReferralDialog) handle
+CRUD operation inputs. The view layer contains zero business logic, focusing
+exclusively on presentation and user interaction capture. All data modification
+requests are delegated to the controller layer, maintaining strict MVC
+boundaries.
+
+The CONTROLLER layer bridges model and view through the controllers package.
+DataController serves as the primary coordinator, managing entity collections
+using HashMap for optimal performance. ReferralController implements the
+singleton pattern for centralized referral workflow management. Controllers
+utilize DataFileHandler for persistence operations, abstracting file I/O from
+business logic. The double-checked locking singleton pattern ensures thread-safe
+lazy initialization of the ReferralController instance.
+
+DESIGN PATTERNS AND TECHNICAL APPROACH
+
+The double-checked locking singleton pattern for ReferralController provides
+thread-safe lazy initialization while minimizing synchronization overhead. The
+pattern uses a volatile field to prevent instruction reordering issues in
+multi-threaded environments. This implementation ensures only one
+ReferralController instance exists system-wide, critical for maintaining
+referral workflow consistency and audit trail integrity.
+
+DataFileHandler employs Java 8 Streams API with Files.lines() for functional-
+style data processing. This modern approach enables declarative CSV parsing with
+automatic resource management. Stream operations (map, filter, collect) provide
+elegant data transformation pipelines while maintaining code readability.
+
+HashMap collections throughout the system provide constant-time complexity for
+entity lookups by identifier, significantly improving performance over
+List-based alternatives for large datasets. The concurrent HashMap variant in
+ReferralController ensures thread-safe operations without external
+synchronization.
+
+CONCLUSION
+
+The implementation successfully realizes Part 1 designs through layered MVC
+architecture. The double-checked locking singleton provides robust referral
+management. Modern Java features including streams and lambda expressions
+demonstrate contemporary development practices while maintaining assignment
+requirements.
+
+================================================================================
+END OF REPORT
+================================================================================
