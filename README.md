@@ -3,7 +3,7 @@
 **Author:** Utsav Prajapati  
 **Module:** Software Architecture - Part 2  
 **University:** University of Hertfordshire  
-**Date:** January 2026
+**Date:** December 2025
 
 ## Overview
 
@@ -132,7 +132,6 @@ utsav_prajapati_healthcare/
 | Class structure | Matches design | 5/5 |
 | Relationships | Proper modeling | 10/10 |
 | Git log | 12 commits | 5/5 |
-| Report | 471 words | 10/10 |
 
 ## Technical Highlights
 
@@ -144,4 +143,3 @@ utsav_prajapati_healthcare/
 
 ---
 
-**Contact:** utsav.prajapati@student.herts.ac.uk
